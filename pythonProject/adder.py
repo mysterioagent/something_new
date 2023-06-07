@@ -26,11 +26,18 @@ def insert_into_table(info, name=TABLENAME):
         cursor.execute(query)
 
 
-def select_info_from_table(name=TABLENAME):
+def select_all_info_from_table(name=TABLENAME):
     with sq3.connect("test_database.db") as connection:
         cursor = connection.cursor()
         query = """SELECT * FROM {};""".format(name)
         return cursor.execute(query).fetchall()
+
+
+def select_one_row_from_table(dt, commodity, name=TABLENAME):
+    with sq3.connect("test_database.db") as connection:
+        cursor = connection.cursor()
+        query = """SELECT * FROM {} WHERE date(systime) = '{}' and name = '{}';""".format(name, dt, commodity)
+        return cursor.execute(query).fetchone()
 
 
 def rows_count_from_table(name=TABLENAME):
