@@ -1,5 +1,6 @@
 from get_xml import take_price
 from adder import *
+from test import *
 
 class Commodity:
 
@@ -57,10 +58,13 @@ smlt.buy(3024.5, 60, my_first_portfolio)
 print(my_first_portfolio.__dict__)
 print(my_second_portfolio.__dict__)
 
-for d in my_first_portfolio.commodities.keys() | my_second_portfolio.commodities.keys():
-    print(take_price(d))
-
 create_table()
 
+for d in my_first_portfolio.commodities.keys() | my_second_portfolio.commodities.keys():
+    a = take_price(d)
+    print(a)
+    insert_into_table(a)
+
+delete_upper_rows()
 print(select_info_from_table())
 

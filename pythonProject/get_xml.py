@@ -15,10 +15,13 @@ def take_price(name):
         a = re.findall(r'(BOARDID="TQBR".{0,50}BID.{0,5000})', d)
         if len(a)>0:
             k = a[0]
-            bid = k[k.find('BID')+5:k.find('"', k.find('BID')+5)]
-            offer = k[k.find('OFFER')+7:k.find('"', k.find('OFFER')+7)]
+            open_price = k[k.find('OPEN')+6:k.find('"', k.find('OPEN')+6)]
+            low_price = k[k.find('LOW')+5:k.find('"', k.find('LOW')+5)]
+            high_price = k[k.find('HIGH')+6:k.find('"', k.find('HIGH')+6)]
+            last_price = k[k.find('LAST')+6:k.find('"', k.find('LAST')+6)]
             updatetime = k[k.find('UPDATETIME')+12:k.find('"', k.find('UPDATETIME')+12)]
             systime = k[k.find('SYSTIME')+9:k.find('"', k.find('SYSTIME')+9)]
-    return name, float(bid), float(offer), updatetime, systime
+    return name, float(open_price), float(low_price), float(high_price), float(last_price), updatetime, systime
+
 
 #take_price("AFLT")
